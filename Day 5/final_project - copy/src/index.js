@@ -4,9 +4,11 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 
 import App from "./components/App";
+import { countryReducer } from "./reducers/countryReducer";
 import { userReducer } from "./reducers/userReducer";
 
 const combined = combineReducers({
+  countryReducer,
   userReducer
 });
 

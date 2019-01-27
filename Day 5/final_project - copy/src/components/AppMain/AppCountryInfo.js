@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import CountryName from "./Country/CountryName";
+import CountryFlag from "./Country/CountryFlag";
 
 class AppCountryInfo extends Component {
   render() {
     return (
       <div>
-        <h4>{this.props.countryName}</h4>
-        <h4> flag </h4>
+        <CountryName name={this.props.countryName} />
+        <CountryFlag flagUrl={this.props.countryFlag} />
       </div>
     );
   }

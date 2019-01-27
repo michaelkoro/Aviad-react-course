@@ -13,7 +13,16 @@ class AppHome extends Component {
           alt=""
         />
         <h3>{bookStoreInfo.address}</h3>
-        <AppCountryInfo countryName={bookStoreInfo.country} />
+        <AppCountryInfo
+          countryName={bookStoreInfo.country}
+          countryFlag={
+            this.props.countries !== undefined
+              ? this.props.countries.find(
+                  country => country.name === bookStoreInfo.country
+                ).flag
+              : "alt"
+          }
+        />
       </div>
     );
   }
@@ -23,7 +32,8 @@ const mapStateToProps = state => {
   // filter only the reqiered props that we will use in the App component
   // then we can access them inside the class as: this.props.count & this.props.name
   return {
-    name: state.userReducer.user.userName
+    name: state.userReducer.user.userName,
+    countries: state.countryReducer.countries
   };
 };
 

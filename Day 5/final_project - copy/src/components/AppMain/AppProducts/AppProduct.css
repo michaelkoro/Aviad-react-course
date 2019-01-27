@@ -1,0 +1,8 @@
+.products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.productPreview {
+  text-align: center;
+}

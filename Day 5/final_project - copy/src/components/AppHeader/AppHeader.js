@@ -20,7 +20,9 @@ class AppHeader extends Component {
           <Link to="/account">My Account</Link>
         </button>
 
-        <button>Products</button>
+        <button>
+          <Link to="/products">Products</Link>
+        </button>
         {this.props.name !== "Guest" ? <button>My Cart</button> : ""}
       </div>
     );

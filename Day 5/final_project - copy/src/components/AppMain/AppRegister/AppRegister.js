@@ -1,15 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import CountryDropDown from "../Country/CountryDropDown";
 import "./AppRegister.css";
 
 class AppRegister extends Component {
-  login = () => {
+  constructor(props) {
+    super(props);
+    this.state = { countries: [], selectedCountry: {} };
+    this.getCountries();
+  }
+
+  async getCountries() {
+    let text = await fetch(
+      "https://restcountries.eu/rest/v2/all?fields=name;flag"
+    );
+    let body = await text.json();
+    this.setState({ countries: body });
+  }
+
+  register = () => {
     let userName = this.refs.userName.value;
     let password = this.refs.password.value;
     if (this.validUsername(userName) && this.validPassword(password)) {
-      alert("ok");
       this.props.dispatch({
-        type: "LOGIN",
+        type: "REGISTER",
         payload: { userName, password }
       });
     } else {
@@ -37,14 +51,30 @@ class AppRegister extends Component {
     return check;
   };
 
+  changeSelectedCountry = event => {
+    let country = this.state.countries.find(
+      country => country.name === event.target.value
+    );
+    this.setState({ selectedCountry: country });
+  };
+
   render() {
     return (
       <div className="login">
+        <label>First Name:</label>
+        <input ref="firstName" />
+        <label>Last Name:</label>
+        <input ref="lastName" />
         <label>Username:</label>
         <input ref="userName" />
         <label>Password:</label>
         <input ref="password" type="password" />
-        <button onClick={this.login}>Login</button>
+        <label>Country</label>
+        <CountryDropDown
+          countries={this.state.countries}
+          changeSelectedCountry={this.changeSelectedCountry}
+        />
+        <button onClick={this.register}>Register</button>
       </div>
     );
   }
