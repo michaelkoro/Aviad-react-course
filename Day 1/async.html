@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Countries</title>
+    <script>
+      fetch("https://restcountries.eu/rest/v2/all?fields=name;borders")
+        .then(text => text.json())
+        .then(body => {
+          let randNumber = Math.floor(Math.random() * body.length);
+          return body[randNumber]["borders"];
+        })
+        .then(countryBorders => {
+          countryBorders.forEach(country => {
+            let flagImage = `https://restcountries.eu/rest/v2/name/${country}?fields=flag`;
+            console.log(flagImage);
+            fetch(flagImage)
+              .then(text => (body = text.json()))
+              .then(body => {
+                let images = "";
+                body.forEach(flagURL => {
+                  images += `<img src="${flagURL.flag}" alt="flag">`;
+                });
+                document.getElementById("countries").innerHTML = images;
+              })
+              .catch(err => {
+                console.error(err);
+              });
+          });
+        })
+        .catch(err => {
+          console.error("Problem with fetching the data");
+          console.error(err);
+        });
+    </script>
+  </head>
+  <body>
+    <div id="countries"></div>
+  </body>
+</html>

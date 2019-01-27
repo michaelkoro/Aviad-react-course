@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <script>
+      console.log("hi there");
+      let index = 0;
+      new Promise((resolve, reject) => {
+        let arr = [3000, 1500, 1000];
+        resolve(arr);
+        // if (arr && arr.length > 0) {
+        // } else {
+        //   reject();
+        // }
+      })
+        .then(arr => {
+          if (index < arr.length) {
+            setTimeout(() => {
+              console.log(`i've done waiting for ${arr[index]} ms`);
+            }, arr[index]);
+            return arr, index + 1;
+          }
+        })
+        .then((arr, index) => {
+          if (index < arr.length) {
+            setTimeout(() => {
+              console.log(`i've done waiting for ${arr[index]} ms`);
+            }, arr[index]);
+            return arr, index + 1;
+          }
+        })
+        .then((arr, index) => {
+          if (index < arr.length) {
+            setTimeout(() => {
+              console.log(`i've done waiting for ${arr[index]} ms`);
+            }, arr[index]);
+          }
+        });
+      // .catch(() => {
+      //   console.log("arrived to catch");
+      // });
+    </script>
+  </head>
+
+  <body></body>
+</html>
